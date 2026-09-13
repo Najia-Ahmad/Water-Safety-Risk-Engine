@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;">
+    <title>Water Safety Risk Engine</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#141c19">
+
+    <!-- CSS Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/chalkboard.css">
+</head>
+<body class="min-h-screen">
+
+<!-- Printable Header for WHO WSP PDF Export -->
+<div class="print-header hidden">
+    <h1>Water Safety Plan (WSP) Field Assessment Report</h1>
+    <p>World Health Organization Guideline Framework | Risk Assessment & Mitigation Record</p>
+</div>
+
+<!-- Language Picker Modal -->
+<div id="lang_modal" role="dialog" aria-modal="true" aria-labelledby="lang_modal_title" aria-hidden="true" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-md no-print">
+    <div class="chalk-panel rounded-3xl p-8 max-w-md w-full mx-4 border border-white/20 shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="text-5xl mb-3">🌍</div>
+            <h2 id="lang_modal_title" class="text-2xl font-bold mb-1 chalk-font">Select Language / Sprache / Lugha</h2>
+            <p class="text-slate-400 text-xs ui-font">Choose your preferred language</p>
+        </div>
+        <div class="grid grid-cols-1 gap-2.5 max-h-[60vh] overflow-y-auto pr-1">
+            <button onclick="setLanguage('en')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇬🇧</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">English</div>
+                    <div class="text-xs text-slate-400">English</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('fr')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇫🇷</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Français</div>
+                    <div class="text-xs text-slate-400">French</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('es')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇪🇸</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Español</div>
+                    <div class="text-xs text-slate-400">Spanish</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('de')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-cyan-500/20 hover:border-cyan-500/40 transition-all group">
+                <span class="text-3xl">🇩🇪</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Deutsch</div>
+                    <div class="text-xs text-slate-400">German</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('sw')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-cyan-500/20 hover:border-cyan-500/40 transition-all group">
+                <span class="text-3xl">🇹🇿</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Kiswahili</div>
+                    <div class="text-xs text-slate-400">Swahili</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('ar')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇸🇦</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">العربية</div>
+                    <div class="text-xs text-slate-400">Arabic</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('pt')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇧🇷</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Português</div>
+                    <div class="text-xs text-slate-400">Portuguese</div>
+                </div>
+            </button>
+        </div>
+        <div class="mt-4 text-center">
+            <button onclick="closeLanguagePicker()" class="text-xs text-slate-400 hover:text-white underline">Close / Schließen / Funga</button>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto p-4 md:p-8">
+    
+    <!-- Header Toolbar -->
+    <header class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 no-print">
+        <div>
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight flex items-center flex-wrap gap-2 chalk-font">
+                <span class="title-text" data-i18n="title">Water Safety Risk Engine</span>
+                <span class="text-xs font-mono font-medium text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-2 py-1 rounded">v1.2.0</span>
+                <span class="text-xs text-slate-400 font-normal">by Najia Ahmad</span>
+            </h1>
+        </div>
+        <div class="flex gap-2 flex-wrap items-center">
+             <!-- Theme & Accessibility Controls -->
+             <button onclick="toggleTheme()" class="chalk-panel hover:bg-white/10 p-2.5 rounded-xl transition border text-amber-300" title="Toggle Chalkboard / Whiteboard Theme" aria-label="Toggle Theme">
+                <i id="theme_icon" class="fas fa-sun text-lg"></i>
+             </button>
+             <button id="cb_toggle_btn" onclick="toggleColorblindMode()" class="chalk-panel hover:bg-white/10 p-2.5 rounded-xl transition border text-purple-300" title="Colorblind Mode" aria-label="Colorblind Mode">
+                <i class="fas fa-eye text-lg"></i>
+             </button>
+             <button onclick="speakAssessmentResult()" class="chalk-panel hover:bg-white/10 p-2.5 rounded-xl transition border text-blue-300" title="Audio Guidance (Text-to-Speech)" aria-label="Audio Guidance">
+                <i class="fas fa-volume-high text-lg"></i>
+             </button>
+             <button onclick="window.print()" class="chalk-panel hover:bg-white/10 text-cyan-300 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 text-xs border border-cyan-500/30" title="Print WHO WSP PDF Report">
+                <i class="fas fa-file-pdf"></i> <span data-i18n="pdfReport">PDF Report</span>
+             </button>
+             <button onclick="saveAssessmentToDB()" class="chalk-panel hover:bg-white/10 text-emerald-300 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 text-xs border border-emerald-500/30" title="Save to IndexedDB">
+                <i class="fas fa-save"></i> <span data-i18n="saveAssessment">Save DB</span>
+             </button>
+             <button onclick="exportData()" class="chalk-panel hover:bg-white/10 text-emerald-300 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 text-xs border border-emerald-500/30" title="Export Assessment">
+                <i class="fas fa-download"></i> <span data-i18n="export">Export</span>
+             </button>
+             <button onclick="document.getElementById('photo_input').click()" class="chalk-panel hover:bg-white/10 text-amber-300 p-2.5 rounded-xl transition border border-amber-500/30" title="Add Photo">
+                <i class="fas fa-camera text-lg"></i>
+             </button>
+             <input type="file" id="photo_input" accept="image/*" capture="environment" class="hidden" onchange="handlePhoto(event)">
+             <button onclick="resampleRisk()" class="chalk-panel hover:bg-white/10 text-purple-300 p-2.5 rounded-xl transition border border-purple-500/30" title="Resample">
+                <i class="fas fa-dice text-lg"></i>
+             </button>
+             <button onclick="runTestsUI()" class="chalk-panel hover:bg-white/10 text-cyan-300 p-2.5 rounded-xl transition border border-cyan-500/30" title="Run Verification">
+                <i class="fas fa-vial text-lg"></i>
+             </button>
+             <button onclick="resetInputs()" class="chalk-panel hover:bg-white/10 text-slate-300 px-3 py-2 rounded-xl font-medium transition text-xs" data-i18n="reset">
+                Reset
+             </button>
+             <button onclick="showLanguagePicker()" class="chalk-panel hover:bg-white/10 text-slate-300 px-2.5 py-2 rounded-xl font-medium transition text-xs" title="Change Language">
+                <i class="fas fa-globe"></i> <span id="current_lang_flag">🇬🇧</span>
+             </button>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Column: Inputs -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- Source Type -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-cyan-300 chalk-font">
+                    <i class="fas fa-faucet text-cyan-400"></i> <span data-i18n="sourceVulnerability">Source & Vulnerability</span>
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="source_type" class="block text-xs font-semibold uppercase tracking-wider mb-2 text-slate-400" data-i18n="sourceType">Source Type</label>
+                        <select id="source_type" class="w-full chalk-input rounded-xl p-2.5 text-sm" onchange="updateUI()">
+                            <option value="piped_chlorinated">Piped (Chlorinated)</option>
+                            <option value="protected_borehole">Protected Borehole</option>
+                            <option value="protected_well">Protected Well</option>
+                            <option value="rainwater">Rainwater Catchment</option>
+                            <option value="unprotected_borehole">Unprotected Borehole</option>
+                            <option value="unprotected_well">Unprotected Well</option>
+                            <option value="surface_water">Surface Water (River/Dam)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/5">
+                        <label for="is_vulnerable" class="text-sm cursor-pointer" data-i18n="householdVulnerable">Household Vulnerable?</label>
+                        <input type="checkbox" id="is_vulnerable" class="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+
+                    <!-- Active Epidemic Outbreak Alert Multiplier -->
+                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-red-950/40 border border-red-500/40">
+                        <label for="active_outbreak" class="text-xs font-bold text-red-300 cursor-pointer leading-snug" data-i18n="activeOutbreak">Active Disease Outbreak Alert (District)</label>
+                        <input type="checkbox" id="active_outbreak" class="w-5 h-5 rounded border-red-600 text-red-500 focus:ring-red-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environmental -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-blue-300 chalk-font">
+                    <i class="fas fa-cloud-showers-heavy text-blue-400"></i> <span data-i18n="environment">Environment</span>
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition">
+                        <label for="heavy_rain" class="text-sm cursor-pointer" data-i18n="heavyRain">Heavy Rain (Last 5 days)</label>
+                        <input type="checkbox" id="heavy_rain" class="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition">
+                        <label for="flooding" class="text-sm cursor-pointer" data-i18n="flooding">Flooding (Last 5 days)</label>
+                        <input type="checkbox" id="flooding" class="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+                    
+                    <div class="pt-4 border-t border-white/10">
+                        <div class="flex justify-between mb-2">
+                            <label for="hours_since" class="text-xs font-semibold uppercase text-slate-400" data-i18n="hoursSinceEvent">Hours Since Event</label>
+                            <span id="hours_display" class="text-xs font-mono text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/20">N/A</span>
+                        </div>
+                        <input type="range" id="hours_since" min="0" max="120" value="12" disabled 
+                               aria-label="Hours since rain or flood event"
+                               class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer disabled:opacity-30 slider-thumb"
+                               oninput="updateUI()">
+                        <div class="flex justify-between text-[10px] text-slate-400 mt-2 font-mono">
+                            <span>0h</span>
+                            <span>36h (τ)</span>
+                            <span>120h (Max)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-rose-300 chalk-font">
+                    <i class="fas fa-map-marker-alt text-rose-400"></i> <span data-i18n="yourLocation">Your Location</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex gap-2">
+                        <button onclick="detectLocation()" class="flex-1 chalk-input hover:bg-white/10 text-cyan-300 px-3 py-2 rounded-xl text-sm transition flex items-center justify-center gap-2 font-medium">
+                            <i class="fas fa-location-crosshairs"></i> <span data-i18n="detect">Detect</span>
+                        </button>
+                        <select id="region_select" class="flex-1 chalk-input rounded-xl p-2 text-sm" onchange="updateBacteria()" aria-label="Select Region">
+                            <option value="">Select Region...</option>
+                            <option value="south_asia">South Asia</option>
+                            <option value="sub_saharan_africa">Sub-Saharan Africa</option>
+                            <option value="southeast_asia">Southeast Asia</option>
+                            <option value="latin_america">Latin America</option>
+                            <option value="middle_east">Middle East / N. Africa</option>
+                            <option value="east_asia">East Asia</option>
+                            <option value="europe">Europe</option>
+                            <option value="north_america">North America</option>
+                            <option value="oceania">Oceania</option>
+                        </select>
+                    </div>
+                    <div id="location_status" class="text-xs text-slate-400 text-center hidden">Detecting location...</div>
+                    <div id="detected_location" class="text-xs text-emerald-400 text-center font-medium hidden"></div>
+                </div>
+            </div>
+
+            <!-- Observations & Hygiene -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-purple-300 chalk-font">
+                    <i class="fas fa-eye text-purple-400"></i> <span data-i18n="observations">Observations & Hygiene</span>
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="space-y-2 border-b border-white/10 pb-4">
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="turbidity_visible" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="turbidityVisible">Turbidity Visible</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="smell_or_taste_change" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="smellTasteChange">Smell/Taste Change</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="animals_access" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="animalsAccess">Animal Access / Open Container</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="dirty_container" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="dirtyContainer">Dirty Fetching Container</span>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/20 space-y-2 border border-white/5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="latrineDistance">Latrine Distance</p>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="latrine" value="none" checked onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="safeDistance">Safe Distance (>30m)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="latrine" value="10_to_30" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="lat10to30">10m - 30m</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-amber-300">
+                            <input type="radio" name="latrine" value="under_10" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="latUnder10">Under 10m (High Risk)</span>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/20 space-y-2 border border-white/5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="storageDuration">Storage Duration</p>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="storage" value="none" checked onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="freshCovered">Fresh / Covered</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="storage" value="24h" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="uncovered24h">Uncovered > 24h</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-amber-300">
+                            <input type="radio" name="storage" value="48h" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="uncovered48h">Uncovered > 48h</span>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/20 space-y-2 border border-white/5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="diarrhoeaSignal">Diarrhoea Signal in Community</p>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="diarrhoea" value="none" checked onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="diarrhoeaNone">None</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="diarrhoea" value="mild" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="diarrhoeaMild">Mild Signal (1-2 cases)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-red-300">
+                            <input type="radio" name="diarrhoea" value="strong" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="diarrhoeaStrong">Strong Signal (Outbreak)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Results -->
+        <div class="lg:col-span-8 space-y-6">
+            
+            <!-- Main Score Card -->
+            <div class="chalk-panel rounded-2xl overflow-hidden relative border border-white/20">
+                <div class="p-6 border-b border-white/10 flex justify-between items-center relative z-10">
+                    <h2 class="text-2xl font-bold chalk-font" data-i18n="riskAssessmentResult">Risk Assessment Result</h2>
+                    <span id="risk_badge" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg backdrop-blur-md">
+                        Calculating...
+                    </span>
+                </div>
+                
+                <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+                    <!-- Gauge / Score -->
+                    <div class="flex flex-col items-center justify-center text-center">
+                         <div class="relative w-56 h-28 mb-4">
+                            <svg viewBox="0 0 100 50" role="img" aria-label="Risk level gauge" class="w-full h-full transform overflow-visible">
+                                <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="8" stroke-linecap="round" />
+                                <path id="gauge_arc" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" class="transition-all duration-700 ease-out" />
+                                <text x="50" y="45" text-anchor="middle" class="text-[16px] font-bold fill-current chalk-font" id="percent_text">0%</text>
+                            </svg>
+                         </div>
+                         <div class="text-sm font-medium text-slate-400" data-i18n="probContamination">Probability of Contamination</div>
+                         <div class="mt-6 flex gap-3 text-xs font-mono text-slate-400 bg-black/20 p-2 rounded-lg border border-white/5">
+                            <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div><span data-i18n="low">Low</span></div>
+                            <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div><span data-i18n="moderate">Mod</span></div>
+                            <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-red-500"></div><span data-i18n="high">High</span></div>
+                         </div>
+                    </div>
+
+                    <!-- Credible Interval & Top Drivers -->
+                    <div class="space-y-6 flex flex-col justify-center">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3" data-i18n="confidenceInterval">Confidence Interval (90% Credible)</p>
+                            <div class="relative h-4 bg-slate-800/60 rounded-full w-full border border-white/10 overflow-hidden">
+                                <div id="ci_bar" class="absolute h-full bg-cyan-500/30 rounded-full transition-all duration-500" style="left: 0%; width: 0%;"></div>
+                                <div id="median_marker" class="absolute h-full w-1 bg-cyan-400 shadow-md transition-all duration-500" style="left: 0%;"></div>
+                            </div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mt-2">
+                                <span id="ci_low">0.00</span>
+                                <span id="ci_median" class="text-cyan-400 font-bold">0.00</span>
+                                <span id="ci_high">1.00</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3" data-i18n="topDrivers">Top Drivers</p>
+                            <ul id="reasons_list" class="space-y-2 text-sm">
+                                <!-- Populated by JS -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disclaimer Banner -->
+                <div class="px-6 pb-4 relative z-10">
+                    <div class="bg-amber-900/30 border border-amber-500/30 rounded-xl p-3.5 flex items-start gap-3">
+                        <span class="text-amber-400 text-lg">⚠️</span>
+                        <p class="text-xs text-amber-200/90 leading-relaxed" data-i18n="resultsDisclaimer">
+                            <strong class="text-amber-300">Not an official WHO tool.</strong> This is for educational purposes only. Risk estimates are statistical models and should not replace professional water testing or medical advice.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nearby Clean Water Finder Panel (STREET MAP MAIN + TOGGLABLE COMPASS RADAR) -->
+            <div class="chalk-panel p-6 rounded-2xl" id="clean_water_panel">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <h3 class="font-semibold text-xl flex items-center gap-2 text-cyan-300 chalk-font">
+                        <span class="text-2xl">🚰</span> <span data-i18n="nearbyCleanWater">Nearby Clean Water Sources</span>
+                    </h3>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <select id="clean_water_radius" class="chalk-input rounded-xl px-2 py-1.5 text-xs" aria-label="Search Radius">
+                            <option value="1">1 km</option>
+                            <option value="3">3 km</option>
+                            <option value="5" selected>5 km</option>
+                            <option value="10">10 km</option>
+                        </select>
+                        <button onclick="findNearbyCleanWater()" class="chalk-input hover:bg-white/10 text-cyan-300 px-3 py-1.5 rounded-xl text-xs transition flex items-center gap-1 font-medium">
+                            <i class="fas fa-search-location"></i> <span data-i18n="searchNearbyWater">Search Nearby</span>
+                        </button>
+                        <button onclick="toggleCleanWaterView()" class="chalk-input hover:bg-white/10 text-purple-300 px-2.5 py-1.5 rounded-xl text-xs transition flex items-center gap-1 font-medium" title="Toggle Street Map / 2D Radar View">
+                            <i class="fas fa-compass"></i> <span data-i18n="toggleCompass">Radar / Map</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="clean_water_status" class="text-xs text-slate-400 text-center py-2 hidden"></div>
+                <!-- Main Street Map View -->
+                <div id="clean_water_map_view" class="mb-4 hidden"></div>
+                <!-- Togglable 2D Compass Radar View -->
+                <div id="clean_water_radar_view" class="mb-4 hidden text-center">
+                    <canvas id="radarCanvas" class="mx-auto rounded-xl border border-white/10 bg-black/40 p-2"></canvas>
+                </div>
+                <!-- Clean Water Source List -->
+                <div id="clean_water_list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+            </div>
+
+            <!-- Recommended Actions Card -->
+            <div class="chalk-panel p-6 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-cyan-300 chalk-font">
+                    <i class="fas fa-hand-holding-droplet text-cyan-400"></i> <span data-i18n="recommendedActions">Recommended Actions</span>
+                </h3>
+                <div id="mitigation_list" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+            <!-- Saved Assessments Panel (IndexedDB) -->
+            <div class="chalk-panel p-6 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-emerald-300 chalk-font">
+                    <i class="fas fa-database text-emerald-400"></i> <span data-i18n="savedAssessments">Saved Assessments (IndexedDB)</span>
+                </h3>
+                <div id="saved_history_list" class="space-y-2 max-h-48 overflow-y-auto pr-1"></div>
+            </div>
+
+            <!-- Bacteria Panel -->
+            <div class="chalk-panel p-6 rounded-2xl" id="bacteria_panel">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-emerald-300 chalk-font">
+                    <span class="text-2xl">🦠</span> <span data-i18n="commonPathogens">Common Waterborne Pathogens</span>
+                </h3>
+                <div id="bacteria_content" class="text-sm text-slate-400 text-center py-4">
+                    <i class="fas fa-map-marker-alt text-2xl mb-2 opacity-30"></i>
+                    <p data-i18n="selectRegionBacteria">Select your region to see common waterborne bacteria in your area</p>
+                </div>
+            </div>
+
+            <!-- Photo Documentation -->
+            <div id="photo_panel" class="chalk-panel p-6 rounded-2xl hidden">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-amber-300 chalk-font">
+                    <i class="fas fa-camera text-amber-400"></i> <span data-i18n="photoDoc">Photo Documentation</span>
+                </h3>
+                <div id="photo_preview" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+                <p class="text-xs text-slate-400 mt-3" data-i18n="photoHint">Photos are stored locally and included in exports</p>
+            </div>
+
+            <!-- Decay Curve -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 text-slate-200 chalk-font" data-i18n="decayEffect">Rain/Flood Effect Decay</h3>
+                <div class="relative w-full h-64">
+                    <canvas id="decayChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Verification Console -->
+            <div class="chalk-panel p-6 rounded-2xl border border-slate-700/50">
+                <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
+                    <h3 class="font-bold text-slate-200 text-sm font-mono" data-i18n="verificationSuite">Verification Suite (14 Tests)</h3>
+                    <span id="test_status" class="text-xs uppercase tracking-wider text-slate-400 font-mono">Ready</span>
+                </div>
+                <div id="test_console" class="space-y-1.5 h-44 overflow-y-auto font-mono text-xs">
+                    <span class="text-slate-500">> Waiting for execution... Click "Run Verification" above.</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 pt-8 border-t border-white/10">
+        <div class="chalk-panel rounded-2xl p-6">
+            <div class="flex items-start gap-4">
+                <div class="text-3xl">⚠️</div>
+                <div class="flex-1">
+                    <h4 class="font-bold text-amber-300 mb-2 chalk-font text-lg" data-i18n="disclaimerTitle">Important Disclaimer</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3" data-i18n="disclaimerText">
+                        This tool is for educational and informational purposes only. It is NOT an official WHO application and has not been endorsed or validated by the World Health Organization.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs text-slate-500">
+                        <a href="https://www.who.int/teams/environment-climate-change-and-health/water-sanitation-and-health" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition flex items-center gap-1">
+                            <i class="fas fa-external-link-alt"></i> WHO Water & Sanitation
+                        </a>
+                        <span>|</span>
+                        <span>v1.2.0</span>
+                        <span>|</span>
+                        <span>by Najia Ahmad</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Modular Application Scripts -->
+<script src="js/model.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/bacteria_db.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
