@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:8000/index.html -->
+<html lang="en" dir="ltr"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data: blob:;">
+    <title>Water Safety Risk Engine</title>
+    <link rel="manifest" href="http://127.0.0.1:8000/manifest.json">
+    <meta name="theme-color" content="#141c19">
+
+    <!-- CSS Dependencies -->
+    <script src="./watersafetyriskenginev2_files/saved_resource"></script>
+    <script src="./watersafetyriskenginev2_files/chart.min.js.download"></script>
+    <link rel="stylesheet" href="./watersafetyriskenginev2_files/all.min.css">
+    <link rel="stylesheet" href="./watersafetyriskenginev2_files/chalkboard.css">
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.z-10{z-index:10}.z-50{z-index:50}.mx-4{margin-left:1rem;margin-right:1rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:0.25rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-12{margin-top:3rem}.mt-2{margin-top:0.5rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.block{display:block}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-2{height:0.5rem}.h-2\.5{height:0.625rem}.h-28{height:7rem}.h-4{height:1rem}.h-44{height:11rem}.h-5{height:1.25rem}.h-64{height:16rem}.h-full{height:100%}.max-h-48{max-height:12rem}.max-h-72{max-height:18rem}.max-h-\[60vh\]{max-height:60vh}.min-h-screen{min-height:100vh}.w-1{width:0.25rem}.w-2\.5{width:0.625rem}.w-4{width:1rem}.w-5{width:1.25rem}.w-56{width:14rem}.w-full{width:100%}.max-w-7xl{max-width:80rem}.max-w-md{max-width:28rem}.flex-1{flex:1 1 0%}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.appearance-none{-webkit-appearance:none;appearance:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-1\.5{gap:0.375rem}.gap-10{gap:2.5rem}.gap-2{gap:0.5rem}.gap-2\.5{gap:0.625rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-8{gap:2rem}.space-y-1\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.375rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.375rem * var(--tw-space-y-reverse))}.space-y-2 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.5rem * var(--tw-space-y-reverse))}.space-y-2\.5 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.625rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.625rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-visible{overflow:visible}.overflow-y-auto{overflow-y:auto}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-t{border-top-width:1px}.border-amber-500\/30{border-color:rgb(245 158 11 / 0.3)}.border-cyan-500\/20{border-color:rgb(6 182 212 / 0.2)}.border-cyan-500\/30{border-color:rgb(6 182 212 / 0.3)}.border-emerald-500\/30{border-color:rgb(16 185 129 / 0.3)}.border-purple-500\/30{border-color:rgb(168 85 247 / 0.3)}.border-red-500\/40{border-color:rgb(239 68 68 / 0.4)}.border-red-600{--tw-border-opacity:1;border-color:rgb(220 38 38 / var(--tw-border-opacity, 1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(71 85 105 / var(--tw-border-opacity, 1))}.border-slate-700\/50{border-color:rgb(51 65 85 / 0.5)}.border-white\/10{border-color:rgb(255 255 255 / 0.1)}.border-white\/20{border-color:rgb(255 255 255 / 0.2)}.border-white\/5{border-color:rgb(255 255 255 / 0.05)}.border-black\/10{border-color:rgb(0 0 0 / 0.1)}.border-emerald-500\/40{border-color:rgb(16 185 129 / 0.4)}.bg-amber-900\/30{background-color:rgb(120 53 15 / 0.3)}.bg-black\/20{background-color:rgb(0 0 0 / 0.2)}.bg-black\/40{background-color:rgb(0 0 0 / 0.4)}.bg-black\/75{background-color:rgb(0 0 0 / 0.75)}.bg-cyan-400{--tw-bg-opacity:1;background-color:rgb(34 211 238 / var(--tw-bg-opacity, 1))}.bg-cyan-500\/30{background-color:rgb(6 182 212 / 0.3)}.bg-cyan-950\/60{background-color:rgb(8 51 68 / 0.6)}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68 / var(--tw-bg-opacity, 1))}.bg-red-950\/40{background-color:rgb(69 10 10 / 0.4)}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-800\/60{background-color:rgb(30 41 59 / 0.6)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-white\/5{background-color:rgb(255 255 255 / 0.05)}.bg-yellow-500{--tw-bg-opacity:1;background-color:rgb(234 179 8 / var(--tw-bg-opacity, 1))}.bg-emerald-500\/20{background-color:rgb(16 185 129 / 0.2)}.bg-emerald-900\/40{background-color:rgb(6 78 59 / 0.4)}.fill-current{fill:currentColor}.p-1{padding:0.25rem}.p-2{padding:0.5rem}.p-2\.5{padding:0.625rem}.p-3\.5{padding:0.875rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-2\.5{padding-left:0.625rem;padding-right:0.625rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pb-2{padding-bottom:0.5rem}.pb-4{padding-bottom:1rem}.pb-6{padding-bottom:1.5rem}.pr-1{padding-right:0.25rem}.pt-4{padding-top:1rem}.pt-8{padding-top:2rem}.pt-3{padding-top:0.75rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-5xl{font-size:3rem;line-height:1}.text-\[10px\]{font-size:10px}.text-\[16px\]{font-size:16px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.text-base{font-size:1rem;line-height:1.5rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-normal{font-weight:400}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-relaxed{line-height:1.625}.leading-snug{line-height:1.375}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-amber-200\/90{color:rgb(253 230 138 / 0.9)}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-blue-300{--tw-text-opacity:1;color:rgb(147 197 253 / var(--tw-text-opacity, 1))}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}.text-cyan-400{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.text-cyan-500{--tw-text-opacity:1;color:rgb(6 182 212 / var(--tw-text-opacity, 1))}.text-emerald-300{--tw-text-opacity:1;color:rgb(110 231 183 / var(--tw-text-opacity, 1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.text-purple-300{--tw-text-opacity:1;color:rgb(216 180 254 / var(--tw-text-opacity, 1))}.text-purple-400{--tw-text-opacity:1;color:rgb(192 132 252 / var(--tw-text-opacity, 1))}.text-purple-500{--tw-text-opacity:1;color:rgb(168 85 247 / var(--tw-text-opacity, 1))}.text-red-300{--tw-text-opacity:1;color:rgb(252 165 165 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-rose-300{--tw-text-opacity:1;color:rgb(253 164 175 / var(--tw-text-opacity, 1))}.text-rose-400{--tw-text-opacity:1;color:rgb(251 113 133 / var(--tw-text-opacity, 1))}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.underline{-webkit-text-decoration-line:underline;text-decoration-line:underline}.opacity-30{opacity:0.3}.opacity-80{opacity:0.8}.opacity-90{opacity:0.9}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-500{transition-duration:500ms}.duration-700{transition-duration:700ms}.ease-out{transition-timing-function:cubic-bezier(0, 0, 0.2, 1)}.hover\:border-cyan-500\/30:hover{border-color:rgb(6 182 212 / 0.3)}.hover\:border-cyan-500\/40:hover{border-color:rgb(6 182 212 / 0.4)}.hover\:bg-cyan-500\/20:hover{background-color:rgb(6 182 212 / 0.2)}.hover\:bg-white\/10:hover{background-color:rgb(255 255 255 / 0.1)}.hover\:bg-white\/5:hover{background-color:rgb(255 255 255 / 0.05)}.hover\:text-cyan-400:hover{--tw-text-opacity:1;color:rgb(34 211 238 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.hover\:opacity-100:hover{opacity:1}.focus\:ring-cyan-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(6 182 212 / var(--tw-ring-opacity, 1))}.focus\:ring-purple-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(168 85 247 / var(--tw-ring-opacity, 1))}.focus\:ring-red-500:focus{--tw-ring-opacity:1;--tw-ring-color:rgb(239 68 68 / var(--tw-ring-opacity, 1))}.disabled\:opacity-30:disabled{opacity:0.3}.group:hover .group-hover\:text-cyan-300{--tw-text-opacity:1;color:rgb(103 232 249 / var(--tw-text-opacity, 1))}@media (min-width: 640px){.sm\:flex-row{flex-direction:row}.sm\:items-center{align-items:center}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:items-center{align-items:center}.md\:p-8{padding:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width: 1024px){.lg\:col-span-4{grid-column:span 4 / span 4}.lg\:col-span-8{grid-column:span 8 / span 8}.lg\:grid-cols-12{grid-template-columns:repeat(12, minmax(0, 1fr))}}</style></head>
+<body class="min-h-screen">
+
+<!-- Printable Header for WHO WSP PDF Export -->
+<div class="print-header hidden">
+    <h1>Water Safety Plan (WSP) Field Assessment Report</h1>
+    <p>World Health Organization Guideline Framework | Risk Assessment &amp; Mitigation Record</p>
+</div>
+
+<!-- Language Picker Modal -->
+<div id="lang_modal" role="dialog" aria-modal="true" aria-labelledby="lang_modal_title" aria-hidden="true" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-md no-print" style="display: none;">
+    <div class="chalk-panel rounded-3xl p-8 max-w-md w-full mx-4 border border-white/20 shadow-2xl">
+        <div class="text-center mb-6">
+            <div class="text-5xl mb-3">🌍</div>
+            <h2 id="lang_modal_title" class="text-2xl font-bold mb-1 chalk-font">Select Language / Sprache / Lugha</h2>
+            <p class="text-slate-400 text-xs ui-font">Choose your preferred language</p>
+        </div>
+        <div class="grid grid-cols-1 gap-2.5 max-h-[60vh] overflow-y-auto pr-1">
+            <button onclick="setLanguage('en')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇬🇧</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">English</div>
+                    <div class="text-xs text-slate-400">English</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('fr')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇫🇷</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Français</div>
+                    <div class="text-xs text-slate-400">French</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('es')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇪🇸</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Español</div>
+                    <div class="text-xs text-slate-400">Spanish</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('de')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-cyan-500/20 hover:border-cyan-500/40 transition-all group">
+                <span class="text-3xl">🇩🇪</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Deutsch</div>
+                    <div class="text-xs text-slate-400">German</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('sw')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-cyan-500/20 hover:border-cyan-500/40 transition-all group">
+                <span class="text-3xl">🇹🇿</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Kiswahili</div>
+                    <div class="text-xs text-slate-400">Swahili</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('ar')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇸🇦</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">العربية</div>
+                    <div class="text-xs text-slate-400">Arabic</div>
+                </div>
+            </button>
+            <button onclick="setLanguage('pt')" class="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 hover:bg-cyan-500/20 border border-white/10 hover:border-cyan-500/30 transition-all group">
+                <span class="text-3xl">🇧🇷</span>
+                <div class="text-left">
+                    <div class="font-semibold group-hover:text-cyan-300">Português</div>
+                    <div class="text-xs text-slate-400">Portuguese</div>
+                </div>
+            </button>
+        </div>
+        <div class="mt-4 text-center">
+            <button onclick="closeLanguagePicker()" class="text-xs text-slate-400 hover:text-white underline">Close / Schließen / Funga</button>
+        </div>
+    </div>
+</div>
+
+<div class="max-w-7xl mx-auto p-4 md:p-8">
+    
+    <!-- Header Toolbar -->
+    <header class="mb-8 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-6 no-print">
+        <div>
+            <h1 class="text-3xl md:text-4xl font-bold tracking-tight flex items-center flex-wrap gap-2 chalk-font">
+                <span class="title-text" data-i18n="title">Water Safety Risk Engine</span>
+                <span class="text-xs font-mono font-medium text-cyan-300 bg-cyan-950/60 border border-cyan-500/30 px-2 py-1 rounded">v1.2.0</span>
+                <span class="text-xs text-slate-400 font-normal">by Najia Ahmad</span>
+            </h1>
+        </div>
+        <div class="flex gap-2 flex-wrap items-center">
+             <!-- Theme & Accessibility Controls -->
+             <button onclick="toggleTheme()" class="chalk-panel hover:bg-white/10 p-2.5 rounded-xl transition border text-amber-300" title="Toggle Chalkboard / Whiteboard Theme" aria-label="Toggle Theme">
+                <i id="theme_icon" class="fas fa-sun"></i>
+             </button>
+             <button id="cb_toggle_btn" onclick="toggleColorblindMode()" class="chalk-panel hover:bg-white/10 p-2.5 rounded-xl transition border text-purple-300" title="Colorblind Mode" aria-label="Colorblind Mode">
+                <i class="fas fa-eye text-lg"></i>
+             </button>
+             <button onclick="speakAssessmentResult()" class="chalk-panel hover:bg-white/10 p-2.5 rounded-xl transition border text-blue-300" title="Audio Guidance (Text-to-Speech)" aria-label="Audio Guidance">
+                <i class="fas fa-volume-high text-lg"></i>
+             </button>
+             <button onclick="window.print()" class="chalk-panel hover:bg-white/10 text-cyan-300 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 text-xs border border-cyan-500/30" title="Print WHO WSP PDF Report">
+                <i class="fas fa-file-pdf"></i> <span data-i18n="pdfReport">Print WHO WSP Report (PDF)</span>
+             </button>
+             <button onclick="saveAssessmentToDB()" class="chalk-panel hover:bg-white/10 text-emerald-300 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 text-xs border border-emerald-500/30" title="Save to IndexedDB">
+                <i class="fas fa-save"></i> <span data-i18n="saveAssessment">Save to Local DB</span>
+             </button>
+             <button onclick="exportData()" class="chalk-panel hover:bg-white/10 text-emerald-300 px-3 py-2 rounded-xl font-medium transition flex items-center gap-1.5 text-xs border border-emerald-500/30" title="Export Assessment">
+                <i class="fas fa-download"></i> <span data-i18n="export">Export</span>
+             </button>
+             <button onclick="document.getElementById('photo_input').click()" class="chalk-panel hover:bg-white/10 text-amber-300 p-2.5 rounded-xl transition border border-amber-500/30" title="Add Photo">
+                <i class="fas fa-camera text-lg"></i>
+             </button>
+             <input type="file" id="photo_input" accept="image/*" capture="environment" class="hidden" onchange="handlePhoto(event)">
+             <button onclick="resampleRisk()" class="chalk-panel hover:bg-white/10 text-purple-300 p-2.5 rounded-xl transition border border-purple-500/30" title="Resample">
+                <i class="fas fa-dice text-lg"></i>
+             </button>
+             <button onclick="runTestsUI()" class="chalk-panel hover:bg-white/10 text-cyan-300 p-2.5 rounded-xl transition border border-cyan-500/30" title="Run Verification">
+                <i class="fas fa-vial text-lg"></i>
+             </button>
+             <button onclick="resetInputs()" class="chalk-panel hover:bg-white/10 text-slate-300 px-3 py-2 rounded-xl font-medium transition text-xs" data-i18n="reset">Reset</button>
+             <button onclick="showLanguagePicker()" class="chalk-panel hover:bg-white/10 text-slate-300 px-2.5 py-2 rounded-xl font-medium transition text-xs" title="Change Language">
+                <i class="fas fa-globe"></i> <span id="current_lang_flag">🇬🇧</span>
+             </button>
+        </div>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <!-- Left Column: Inputs -->
+        <div class="lg:col-span-4 space-y-6">
+            
+            <!-- Source Type -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-cyan-300 chalk-font">
+                    <i class="fas fa-faucet text-cyan-400"></i> <span data-i18n="sourceVulnerability">Source &amp; Vulnerability</span>
+                </h3>
+                <div class="space-y-4">
+                    <div>
+                        <label for="source_type" class="block text-xs font-semibold uppercase tracking-wider mb-2 text-slate-400" data-i18n="sourceType">Source Type</label>
+                        <select id="source_type" class="w-full chalk-input rounded-xl p-2.5 text-sm" onchange="updateUI()">
+                            <option value="piped_chlorinated">Piped (Chlorinated)</option>
+                            <option value="protected_borehole">Protected Borehole</option>
+                            <option value="protected_well">Protected Well</option>
+                            <option value="rainwater">Rainwater Catchment</option>
+                            <option value="unprotected_borehole">Unprotected Borehole</option>
+                            <option value="unprotected_well">Unprotected Well</option>
+                            <option value="surface_water">Surface Water (River/Dam)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="flex items-center justify-between p-2 rounded-xl bg-white/5 border border-white/5">
+                        <label for="is_vulnerable" class="text-sm cursor-pointer" data-i18n="householdVulnerable">Household Vulnerable?</label>
+                        <input type="checkbox" id="is_vulnerable" class="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+
+                    <!-- Active Epidemic Outbreak Alert Multiplier -->
+                    <div class="flex items-center justify-between p-2.5 rounded-xl bg-red-950/40 border border-red-500/40">
+                        <label for="active_outbreak" class="text-xs font-bold text-red-300 cursor-pointer leading-snug" data-i18n="activeOutbreak">Active Disease Outbreak Alert (District)</label>
+                        <input type="checkbox" id="active_outbreak" class="w-5 h-5 rounded border-red-600 text-red-500 focus:ring-red-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Environmental -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-blue-300 chalk-font">
+                    <i class="fas fa-cloud-showers-heavy text-blue-400"></i> <span data-i18n="environment">Environment</span>
+                </h3>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition">
+                        <label for="heavy_rain" class="text-sm cursor-pointer" data-i18n="heavyRain">Heavy Rain (Last 5 days)</label>
+                        <input type="checkbox" id="heavy_rain" class="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+                    <div class="flex items-center justify-between p-2 rounded-xl hover:bg-white/5 transition">
+                        <label for="flooding" class="text-sm cursor-pointer" data-i18n="flooding">Flooding (Last 5 days)</label>
+                        <input type="checkbox" id="flooding" class="w-5 h-5 rounded border-slate-600 text-cyan-500 focus:ring-cyan-500 bg-slate-900 cursor-pointer" onchange="updateUI()">
+                    </div>
+                    
+                    <div class="pt-4 border-t border-white/10 opacity-30">
+                        <div class="flex justify-between mb-2">
+                            <label for="hours_since" class="text-xs font-semibold uppercase text-slate-400" data-i18n="hoursSinceEvent">Hours Since Event</label>
+                            <span id="hours_display" class="text-xs font-mono text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-500/20">N/A</span>
+                        </div>
+                        <input type="range" id="hours_since" min="0" max="120" value="12" disabled="" aria-label="Hours since rain or flood event" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer disabled:opacity-30 slider-thumb" oninput="updateUI()" aria-disabled="true">
+                        <div class="flex justify-between text-[10px] text-slate-400 mt-2 font-mono">
+                            <span>0h</span>
+                            <span>36h (τ)</span>
+                            <span>120h (Max)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-rose-300 chalk-font">
+                    <i class="fas fa-map-marker-alt text-rose-400"></i> <span data-i18n="yourLocation">Your Location</span>
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex gap-2">
+                        <button onclick="detectLocation()" class="flex-1 chalk-input hover:bg-white/10 text-cyan-300 px-3 py-2 rounded-xl text-sm transition flex items-center justify-center gap-2 font-medium">
+                            <i class="fas fa-location-crosshairs"></i> <span data-i18n="detect">Detect</span>
+                        </button>
+                        <select id="region_select" class="flex-1 chalk-input rounded-xl p-2 text-sm" onchange="updateBacteria()" aria-label="Select Region">
+                            <option value="">Select Region...</option>
+                            <option value="south_asia">South Asia</option>
+                            <option value="sub_saharan_africa">Sub-Saharan Africa</option>
+                            <option value="southeast_asia">Southeast Asia</option>
+                            <option value="latin_america">Latin America</option>
+                            <option value="middle_east">Middle East / N. Africa</option>
+                            <option value="east_asia">East Asia</option>
+                            <option value="europe">Europe</option>
+                            <option value="north_america">North America</option>
+                            <option value="oceania">Oceania</option>
+                        </select>
+                    </div>
+                    <div id="location_status" class="text-xs text-slate-400 text-center hidden">Detecting location...</div>
+                    <div id="detected_location" class="text-xs text-emerald-400 text-center font-medium hidden"></div>
+                </div>
+            </div>
+
+            <!-- Observations & Hygiene -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-purple-300 chalk-font">
+                    <i class="fas fa-eye text-purple-400"></i> <span data-i18n="observations">Observations &amp; Hygiene</span>
+                </h3>
+                
+                <div class="space-y-4">
+                    <div class="space-y-2 border-b border-white/10 pb-4">
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="turbidity_visible" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="turbidityVisible">Turbidity Visible</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="smell_or_taste_change" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="smellTasteChange">Smell/Taste Change</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="animals_access" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="animalsAccess">Animal Access / Open Container</span>
+                        </label>
+                        <label class="flex items-center gap-3 cursor-pointer p-1">
+                            <input type="checkbox" id="dirty_container" class="w-4 h-4 rounded border-slate-600 text-purple-500 focus:ring-purple-500 bg-slate-900" onchange="updateUI()">
+                            <span class="text-sm" data-i18n="dirtyContainer">Dirty Fetching Container</span>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/20 space-y-2 border border-white/5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="latrineDistance">Latrine Distance</p>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="latrine" value="none" checked="" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="safeDistance">Safe Distance (&gt;30m)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="latrine" value="10_to_30" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="lat10to30">10m - 30m</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-amber-300">
+                            <input type="radio" name="latrine" value="under_10" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="latUnder10">Under 10m (High Risk)</span>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/20 space-y-2 border border-white/5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="storageDuration">Storage Duration</p>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="storage" value="none" checked="" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="freshCovered">Fresh / Covered</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="storage" value="24h" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="uncovered24h">Uncovered &gt; 24h</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-amber-300">
+                            <input type="radio" name="storage" value="48h" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="uncovered48h">Uncovered &gt; 48h</span>
+                        </label>
+                    </div>
+
+                    <div class="p-3.5 rounded-xl bg-black/20 space-y-2 border border-white/5">
+                        <p class="text-xs font-semibold uppercase tracking-wider text-slate-400" data-i18n="diarrhoeaSignal">Diarrhoea Signal in Household/Community</p>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="diarrhoea" value="none" checked="" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="diarrhoeaNone">None</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm">
+                            <input type="radio" name="diarrhoea" value="mild" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="diarrhoeaMild">Mild Signal (1-2 cases)</span>
+                        </label>
+                        <label class="flex items-center gap-2 cursor-pointer text-sm font-medium text-red-300">
+                            <input type="radio" name="diarrhoea" value="strong" onchange="updateUI()" class="text-cyan-500">
+                            <span data-i18n="diarrhoeaStrong">Strong Signal (Cluster/Outbreak)</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Results -->
+        <div class="lg:col-span-8 space-y-6">
+            
+            <!-- Main Score Card -->
+            <div class="chalk-panel rounded-2xl overflow-hidden relative border border-white/20">
+                <div class="p-6 border-b border-white/10 flex justify-between items-center relative z-10">
+                    <h2 class="text-2xl font-bold chalk-font" data-i18n="riskAssessmentResult">Risk Assessment Result</h2>
+                    <span id="risk_badge" class="px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg backdrop-blur-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">LOW</span>
+                </div>
+                
+                <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-10 relative z-10">
+                    <!-- Gauge / Score -->
+                    <div class="flex flex-col items-center justify-center text-center">
+                         <div class="relative w-56 h-28 mb-4">
+                            <svg viewBox="0 0 100 50" role="img" aria-label="Risk level: 5% contamination probability, category low" class="w-full h-full transform overflow-visible">
+                                <path d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="8" stroke-linecap="round"></path>
+                                <path id="gauge_arc" d="M 10 50 A 40 40 0 0 1 90 50" fill="none" stroke="#38bdf8" stroke-width="8" stroke-linecap="round" class="transition-all duration-700 ease-out" style="stroke-dasharray: 6.28407, 1000; stroke: rgb(16, 185, 129); filter: drop-shadow(rgba(16, 185, 129, 0.5) 0px 0px 8px);"></path>
+                                <text x="50" y="45" text-anchor="middle" class="text-[16px] font-bold fill-current chalk-font" id="percent_text">5%</text>
+                            </svg>
+                         </div>
+                         <div class="text-sm font-medium text-slate-400" data-i18n="probContamination">Probability of Contamination</div>
+                         <div class="mt-6 flex gap-3 text-xs font-mono text-slate-400 bg-black/20 p-2 rounded-lg border border-white/5">
+                            <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-emerald-500"></div><span data-i18n="low">Low</span></div>
+                            <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div><span data-i18n="moderate">Mod</span></div>
+                            <div class="flex items-center gap-1.5"><div class="w-2.5 h-2.5 rounded-full bg-red-500"></div><span data-i18n="high">High</span></div>
+                         </div>
+                    </div>
+
+                    <!-- Credible Interval & Top Drivers -->
+                    <div class="space-y-6 flex flex-col justify-center">
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3" data-i18n="confidenceInterval">Confidence Interval (90% Credible)</p>
+                            <div class="relative h-4 bg-slate-800/60 rounded-full w-full border border-white/10 overflow-hidden">
+                                <div id="ci_bar" class="absolute h-full bg-cyan-500/30 rounded-full transition-all duration-500" style="left: 2.9923%; width: 4.44917%;"></div>
+                                <div id="median_marker" class="absolute h-full w-1 bg-cyan-400 shadow-md transition-all duration-500" style="left: 4.77151%;"></div>
+                            </div>
+                            <div class="flex justify-between text-xs font-mono text-slate-400 mt-2">
+                                <span id="ci_low">0.03</span>
+                                <span id="ci_median" class="text-cyan-400 font-bold">0.05</span>
+                                <span id="ci_high">0.07</span>
+                            </div>
+                        </div>
+
+                        <div>
+                            <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3" data-i18n="topDrivers">Top Drivers</p>
+                            <ul id="reasons_list" class="space-y-2 text-sm"><li class="text-slate-500 italic">No significant risk factors (baseline only)</li></ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Disclaimer Banner -->
+                <div class="px-6 pb-4 relative z-10">
+                    <div class="bg-amber-900/30 border border-amber-500/30 rounded-xl p-3.5 flex items-start gap-3">
+                        <span class="text-amber-400 text-lg">⚠️</span>
+                        <p class="text-xs text-amber-200/90 leading-relaxed" data-i18n="resultsDisclaimer">Not an official WHO tool. This is for educational purposes only. Risk estimates are statistical models and should not replace professional water testing or medical advice.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Nearby Clean Water Finder Panel (STREET MAP MAIN + TOGGLABLE COMPASS RADAR) -->
+            <div class="chalk-panel p-6 rounded-2xl" id="clean_water_panel">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
+                    <h3 class="font-semibold text-xl flex items-center gap-2 text-cyan-300 chalk-font">
+                        <span class="text-2xl">🚰</span> <span data-i18n="nearbyCleanWater">Nearby Clean Water Sources</span>
+                    </h3>
+                    <div class="flex items-center gap-2 flex-wrap">
+                        <select id="clean_water_radius" class="chalk-input rounded-xl px-2 py-1.5 text-xs" aria-label="Search Radius">
+                            <option value="1">1 km</option>
+                            <option value="3">3 km</option>
+                            <option value="5" selected="">5 km</option>
+                            <option value="10">10 km</option>
+                        </select>
+                        <button onclick="findNearbyCleanWater()" class="chalk-input hover:bg-white/10 text-cyan-300 px-3 py-1.5 rounded-xl text-xs transition flex items-center gap-1 font-medium">
+                            <i class="fas fa-search-location"></i> <span data-i18n="searchNearbyWater">Search Nearby Clean Water</span>
+                        </button>
+                        <button onclick="toggleCleanWaterView()" class="chalk-input hover:bg-white/10 text-purple-300 px-2.5 py-1.5 rounded-xl text-xs transition flex items-center gap-1 font-medium" title="Toggle Street Map / 2D Radar View">
+                            <i class="fas fa-compass"></i> <span data-i18n="toggleCompass">Toggle Compass Radar / Map</span>
+                        </button>
+                    </div>
+                </div>
+                <div id="clean_water_status" class="text-xs text-slate-400 text-center py-2 hidden"></div>
+                <!-- Main Street Map View -->
+                <div id="clean_water_map_view" class="mb-4 hidden"></div>
+                <!-- Togglable 2D Compass Radar View -->
+                <div id="clean_water_radar_view" class="mb-4 hidden text-center">
+                    <canvas id="radarCanvas" class="mx-auto rounded-xl border border-white/10 bg-black/40 p-2"></canvas>
+                </div>
+                <!-- Clean Water Source List -->
+                <div id="clean_water_list" class="space-y-2.5 max-h-72 overflow-y-auto pr-1"></div>
+            </div>
+
+            <!-- Recommended Actions Card -->
+            <div class="chalk-panel p-6 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-cyan-300 chalk-font">
+                    <i class="fas fa-hand-holding-droplet text-cyan-400"></i> <span data-i18n="recommendedActions">Recommended Actions</span>
+                </h3>
+                <div id="mitigation_list" class="grid grid-cols-1 md:grid-cols-2 gap-4"><div class="p-4 rounded-lg border text-sm text-emerald-300 bg-emerald-900/40 border-emerald-500/40 flex flex-col justify-between backdrop-blur-sm"><div><strong class="block mb-2 text-base font-semibold tracking-tight">Maintain Safe Practices</strong><p class="leading-relaxed opacity-90">Water appears safe. Ensure transport and storage containers are clean to prevent re-contamination.</p></div><div class="mt-4 pt-3 border-t border-black/10 text-xs">
+                <a href="https://www.who.int/teams/environment-climate-change-and-health/water-sanitation-and-health/water-safety-and-quality/household-water-treatment-and-safe-storage" target="_blank" rel="noopener noreferrer" class="underline font-semibold hover:text-white transition-colors flex items-center gap-1.5 opacity-80 hover:opacity-100">
+                    <i class="fas fa-external-link-alt"></i> WHO: Safe Storage &amp; Treatment
+                </a>
+            </div></div></div>
+            </div>
+
+            <!-- Saved Assessments Panel (IndexedDB) -->
+            <div class="chalk-panel p-6 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-emerald-300 chalk-font">
+                    <i class="fas fa-database text-emerald-400"></i> <span data-i18n="savedAssessments">Saved Assessments (IndexedDB)</span>
+                </h3>
+                <div id="saved_history_list" class="space-y-2 max-h-48 overflow-y-auto pr-1"><div class="text-xs text-slate-500 italic p-2 text-center">No saved assessments in local storage.</div></div>
+            </div>
+
+            <!-- Bacteria Panel -->
+            <div class="chalk-panel p-6 rounded-2xl" id="bacteria_panel">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-emerald-300 chalk-font">
+                    <span class="text-2xl">🦠</span> <span data-i18n="commonPathogens">Common Waterborne Pathogens</span>
+                </h3>
+                <div id="bacteria_content" class="text-sm text-slate-400 text-center py-4"><div class="text-center py-4"><i class="fas fa-map-marker-alt text-2xl mb-2 opacity-30"></i><p>Select your region to see common waterborne bacteria in your area</p></div></div>
+            </div>
+
+            <!-- Photo Documentation -->
+            <div id="photo_panel" class="chalk-panel p-6 rounded-2xl hidden">
+                <h3 class="font-semibold text-xl mb-4 flex items-center gap-2 text-amber-300 chalk-font">
+                    <i class="fas fa-camera text-amber-400"></i> <span data-i18n="photoDoc">Photo Documentation</span>
+                </h3>
+                <div id="photo_preview" class="grid grid-cols-2 md:grid-cols-3 gap-3"></div>
+                <p class="text-xs text-slate-400 mt-3" data-i18n="photoHint">Photos are stored locally and included in exports</p>
+            </div>
+
+            <!-- Decay Curve -->
+            <div class="chalk-panel p-5 rounded-2xl">
+                <h3 class="font-semibold text-xl mb-4 text-slate-200 chalk-font" data-i18n="decayEffect">Rain/Flood Effect Decay</h3>
+                <div class="relative w-full h-64">
+                    <canvas id="decayChart" width="1129" height="384" style="display: block; box-sizing: border-box; height: 256px; width: 752.667px;"></canvas>
+                </div>
+            </div>
+
+            <!-- Verification Console -->
+            <div class="chalk-panel p-6 rounded-2xl border border-slate-700/50">
+                <div class="flex justify-between items-center mb-4 border-b border-white/5 pb-2">
+                    <h3 class="font-bold text-slate-200 text-sm font-mono" data-i18n="verificationSuite">Verification Suite (14 Tests)</h3>
+                    <span id="test_status" class="text-xs uppercase tracking-wider text-slate-400 font-mono">Ready</span>
+                </div>
+                <div id="test_console" class="space-y-1.5 h-44 overflow-y-auto font-mono text-xs">
+                    <span class="text-slate-500">&gt; Waiting for execution... Click "Run Verification" above.</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-12 pt-8 border-t border-white/10">
+        <div class="chalk-panel rounded-2xl p-6">
+            <div class="flex items-start gap-4">
+                <div class="text-3xl">⚠️</div>
+                <div class="flex-1">
+                    <h4 class="font-bold text-amber-300 mb-2 chalk-font text-lg" data-i18n="disclaimerTitle">Important Disclaimer</h4>
+                    <p class="text-sm text-slate-400 leading-relaxed mb-3" data-i18n="disclaimerText">This tool is for educational and informational purposes only. It is NOT an official WHO application and has not been endorsed or validated by the World Health Organization. Risk assessments are based on statistical models and should not replace professional water quality testing or medical advice.</p>
+                    <div class="flex flex-wrap gap-4 text-xs text-slate-500">
+                        <a href="https://www.who.int/teams/environment-climate-change-and-health/water-sanitation-and-health" target="_blank" rel="noopener noreferrer" class="hover:text-cyan-400 transition flex items-center gap-1">
+                            <i class="fas fa-external-link-alt"></i> WHO Water &amp; Sanitation
+                        </a>
+                        <span>|</span>
+                        <span>v1.2.0</span>
+                        <span>|</span>
+                        <span>by Najia Ahmad</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+<!-- Modular Application Scripts -->
+<script src="./watersafetyriskenginev2_files/model.js.download"></script>
+<script src="./watersafetyriskenginev2_files/i18n.js.download"></script>
+<script src="./watersafetyriskenginev2_files/bacteria_db.js.download"></script>
+<script src="./watersafetyriskenginev2_files/app.js.download"></script>
+
+
+</body></html>
